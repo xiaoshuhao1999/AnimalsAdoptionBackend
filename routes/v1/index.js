@@ -185,7 +185,7 @@ router.post("/notice_list/create", noticeCreateModule);
 router.post("/notice_list/edit", noticeEditModule);
 
 /**
- * @api {get} /notice_list/:currentPage?/:limit?/:like? 获取用户数据
+ * @api {get} /user_list/:currentPage?/:limit?/:like? 获取用户数据
  * @apiVersion 0.1.0
  * @apiName GetUserList
  * @apiGroup UserList
@@ -213,7 +213,7 @@ router.post("/notice_list/edit", noticeEditModule);
 router.get("/user_list/:currentPage?/:limit?/:like?",userModule)
 
 /**
- * @api {post} /notice_list/status/:id/:status 修改用户账号状态
+ * @api {post} /user_list/status/:id/:status 修改用户账号状态
  * @apiVersion 0.1.0
  * @apiName ChangeUserStatus
  * @apiGroup UserList
@@ -270,9 +270,7 @@ router.post("/user_list/create", userCreateModule);
  * @apiGroup UserList
  *
  * @apiParam {String} id  用户id
- * @apiParam {String} username  用户名
  * @apiParam {String} nickname  用户昵称
- * @apiParam {String} tel  手机号
  *
  * @apiSuccess {Object} data 返回数据.
  * @apiSuccess {String} msg  返回信息.
@@ -284,7 +282,7 @@ router.post("/user_list/create", userCreateModule);
  *       "data": {
  *        "status":'ok'
  *        }
- *       "msg": "添加成功",
+ *       "msg": "修改成功",
  *       "code": 200"
  *     }
  */

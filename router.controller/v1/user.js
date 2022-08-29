@@ -40,6 +40,9 @@ const userModule = async(req,res,next)=>{
     getLimitPageData = await sqlQuery(SELECT_USERS_LIMIT,[(currentPage-1)*limit,limit]);
   }
   const msg = getLimitPageData.length == 0  ? '没有那么多数据' : '数据获取成功';
+  getLimitPageData.forEach(el => {
+    delete el.password
+  });
   res.send(callResult({totalCount,limitData:getLimitPageData},msg,200));
 }
 
@@ -55,8 +58,10 @@ const userStatusModule = async(req,res,next)=>{
 
 const userCreateModule = async(req,res,next)=>{
   const { username, password, tel } = req.body;
+  // console.log(req.body);
   // 先查看用户名是否已被注册
   const isReg = await sqlQuery(SELECT_USERS_NAME,username);
+  // console.log(isReg);
   if(isReg.length !== 0) return res.send(callResult({},'该用户已存在',403));
   const id = random(8, {letters: 'ABCDEFGHKMNPVW'});
   const nickname = 'Nick_'+random(10, {letters: 'ABCDEFHKMNPVWabcdefhkmnpvw'});
@@ -70,11 +75,11 @@ const userCreateModule = async(req,res,next)=>{
 }
 
 const userUpdateModule = async(req,res,next)=>{
-  const { id, username,nickname,tel } = req.body;
+  const { id,nickname } = req.body;
   // 判断id是否存在
   const selectUserStatus = await sqlQuery(SELECT_USERS_STATUS,id);
   if(!selectUserStatus.length) return res.send(callResult({},'id不存在',403));
-  const updateRes = await sqlQuery(UPDATE_USERS,[username,nickname,tel,id]);
+  const updateRes = await sqlQuery(UPDATE_USERS,[nickname,id]);
   if(updateRes.affectedRows!==1) return res.send(callResult({},'状态修改失败',403));
   res.send(callResult({status:'ok'},'修改成功',200));
 }

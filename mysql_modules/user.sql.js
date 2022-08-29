@@ -6,7 +6,7 @@ const SELECT_USERS_STATUS = "select id from user_info where id = ?;";
 const SELECT_USERS_PASSWORD = "select id,password from user_info where id = ?;";
 const SELECT_USERS_NAME = "select username from user_info where username = ?;";
 const UPDATE_USERS_STATUS = "UPDATE user_info SET status = ? WHERE id = ?;";
-const UPDATE_USERS = "UPDATE user_info SET username = ?,nickname = ?, tel = ? WHERE id = ?;";
+const UPDATE_USERS = "UPDATE user_info SET nickname = ? WHERE id = ?;";
 const UPDATE_USERS_PASSWORD = "UPDATE user_info SET password = ? WHERE id = ?;";
 const UPDATE_USERS_AVATAR = "UPDATE user_info SET avatar = ? WHERE id = ?;";
 const CREATE_USERS = "insert into user_info(id,username,nickname,password,avatar,tel,createtime) values (?,?,?,?,?,?,?);";
